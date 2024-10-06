@@ -1091,6 +1091,8 @@ class MainWindow(QMainWindow):
         self.ui.label_qtd_itens_carrinho_2.setText("0")
         self.ui.label_valor_total_carrinho_2.setText("R$0.00")
         self.ui.label_valor_total_3.setText("R$0.00")
+        self.ui.lineEdit_adicionar_taxa.setText("0")
+        self.ui.lineEdit_adicionar_desconto.setText("0")
         self.value_total = 0
         self.purchase_total = 0
         
