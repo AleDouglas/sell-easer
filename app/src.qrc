@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="icon_success">
+    <file>src/credit-card-svgrepo-com.png</file>
+    <file>src/credit-card-svgrepo-com (1).png</file>
+    <file>src/money-svgrepo-com.png</file>
+  </qresource>
+</RCC>
