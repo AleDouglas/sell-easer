@@ -327,7 +327,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <italic>true</italic>
           <bold>true</bold>
          </font>
@@ -369,7 +369,7 @@ font-weight: bold;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -393,7 +393,7 @@ font-size: 14px</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -417,7 +417,7 @@ font-size: 14px</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -457,7 +457,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -497,7 +497,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -641,8 +641,7 @@ font-size: 30px</string>
         <item>
          <widget class="QTabWidget" name="tabWidget">
           <property name="styleSheet">
-           <string notr="true">border: 1px solid black;
-color: black;
+           <string notr="true">color: black;
 font-weight: bold;</string>
           </property>
           <property name="currentIndex">
@@ -698,16 +697,14 @@ font-weight: bold;</string>
                <item>
                 <widget class="QWidget" name="graphicsView_initial_2" native="true">
                  <property name="styleSheet">
-                  <string notr="true">border: 0;</string>
+                  <string notr="true">border: 0.5px solid black;</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QWidget" name="graphicsView_initial" native="true">
                  <property name="styleSheet">
-                  <string notr="true">border: 0;
-border-top: 1px solid grey;
-</string>
+                  <string notr="true">border: 0.5px solid black;</string>
                  </property>
                 </widget>
                </item>
@@ -741,16 +738,14 @@ border-top: 1px solid grey;
                <item>
                 <widget class="QWidget" name="widget" native="true">
                  <property name="styleSheet">
-                  <string notr="true">border: 0;</string>
+                  <string notr="true">border: 0.5px solid black;</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QWidget" name="widget_2" native="true">
                  <property name="styleSheet">
-                  <string notr="true">border: 0;
-border-top: 1px solid grey;
-</string>
+                  <string notr="true">border: 0.5px solid black;</string>
                  </property>
                 </widget>
                </item>
@@ -765,7 +760,11 @@ border-top: 1px solid grey;
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <widget class="QWidget" name="graphicsView_initial_3" native="true"/>
+             <widget class="QWidget" name="graphicsView_initial_3" native="true">
+              <property name="styleSheet">
+               <string notr="true">border: 0.5px solid black;</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QFrame" name="frame_13">
@@ -780,6 +779,9 @@ border-top: 1px solid grey;
                 <width>250</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border: 0.5px solid black;</string>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -879,7 +881,11 @@ font-weight: bold;</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
-             <widget class="QWidget" name="graphicsView_initial_4" native="true"/>
+             <widget class="QWidget" name="graphicsView_initial_4" native="true">
+              <property name="styleSheet">
+               <string notr="true">border: 0.5px solid black;</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QFrame" name="frame_23">
@@ -894,6 +900,9 @@ font-weight: bold;</string>
                 <width>250</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border: 0.5px solid black;</string>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -993,7 +1002,11 @@ font-weight: bold;</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
-             <widget class="QWidget" name="graphicsView_initial_5" native="true"/>
+             <widget class="QWidget" name="graphicsView_initial_5" native="true">
+              <property name="styleSheet">
+               <string notr="true">border: 0.5px solid black;</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QFrame" name="frame_26">
@@ -1008,6 +1021,9 @@ font-weight: bold;</string>
                 <width>250</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border: 0.5px solid black;</string>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -2602,7 +2618,7 @@ font-size: 24px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2664,7 +2680,7 @@ border-radius: 3px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2711,7 +2727,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2798,7 +2814,7 @@ font-size: 14px;</string>
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>1</pointsize>
+          <pointsize>-1</pointsize>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -3065,7 +3081,7 @@ font-weight: bold;</string>
              <property name="font">
               <font>
                <family>Ubuntu Condensed</family>
-               <pointsize>1</pointsize>
+               <pointsize>-1</pointsize>
                <bold>true</bold>
               </font>
              </property>
@@ -3500,7 +3516,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3575,7 +3591,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3599,7 +3615,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3674,7 +3690,7 @@ border-radius: 3px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <italic>true</italic>
              <bold>true</bold>
             </font>
@@ -3699,7 +3715,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3723,7 +3739,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3904,7 +3920,7 @@ font-weight: bold;</string>
            <property name="font">
             <font>
              <family>Arial</family>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <italic>false</italic>
              <bold>true</bold>
             </font>
@@ -3949,7 +3965,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3974,7 +3990,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3999,7 +4015,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>1</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>

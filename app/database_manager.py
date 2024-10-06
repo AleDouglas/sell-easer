@@ -427,6 +427,7 @@ def populate_test_database(db_manager):
         {"name": "Jane Smith", "cpf": "98765432100", "email": "jane@example.com", "phone": "2222222222"},
         {"name": "Alice Johnson", "cpf": "11223344556", "email": "alice@example.com", "phone": "3333333333"},
         {"name": "Bob Brown", "cpf": "66778899000", "email": "bob@example.com", "phone": "4444444444"},
+        
     ]
     
     # Inserindo clientes

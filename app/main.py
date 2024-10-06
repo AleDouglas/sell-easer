@@ -1465,14 +1465,15 @@ class MainWindow(QMainWindow):
         
         table_style = """
             QTableView {
-                background: white;
+                background-color: white;
                 gridline-color: white;
                 border: 1px solid black;
                 color: black;
+                font-weight: bold;
                 
             }
             QHeaderView::section {
-                color: white;
+                color: black;
                 padding: 4px;
                 font-weight: bold;
                 border: 1px solid black;
