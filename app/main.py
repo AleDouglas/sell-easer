@@ -1285,23 +1285,26 @@ class MainWindow(QMainWindow):
         codigo = self.ui.lineEdit_buscar_estoque_codigo.text()
         produto = None
         # Se tiver código, buscar por ele primeiro
-        if codigo != "":
-            produto = self.sales_processor.search_product(code=codigo)
-            if produto is None or produto.empty:
-                self.ui.error_buscar_estoque.setText("Produto não encontrado")
-                self.ui.error_buscar_estoque.setStyleSheet("color: red")
-                model = PandasModel(produto)
-                self.ui.table_estoque.setModel(model)
-                return
-        else:
-            produto = self.sales_processor.filter_product_name(name=nome)
-            if produto is None or produto.empty:
-                self.ui.error_buscar_estoque.setText("Produto não encontrado")
-                self.ui.error_buscar_estoque.setStyleSheet("color: red")
-                # limpar a tabela de estoque
-                model = PandasModel(produto)
-                self.ui.table_estoque.setModel(model)
-                return
+        produto_codigo = self.sales_processor.search_product(code=codigo)
+        produto_nome = self.sales_processor.filter_product_name(name=nome)
+        # Juntar os dois resultados
+        if produto_codigo is not None and not produto_codigo.empty:
+            produto = produto_codigo
+        if produto_nome is not None and not produto_nome.empty:
+            if produto is not None and not produto.empty:
+                produto = pd.concat([produto, produto_nome])
+            else:
+                produto = produto_nome
+        # Se não encontrar o produto, exibir mensagem de erro
+        if produto is None or produto.empty:
+            self.ui.error_buscar_estoque.setText("Produto não encontrado")
+            self.ui.error_buscar_estoque.setStyleSheet("color: red")
+            # limpar a tabela de estoque
+            model = PandasModel(produto)
+            self.ui.table_estoque.setModel(model)
+            return
+        # Renomear as colunas
+        produto.columns = ["ID", "Nome", "Código", "Descrição", "Preço de Compra", "Preço de Venda", "Estoque"]
         # Atualiza a tabela de estoque
         model = PandasModel(produto)
         self.ui.table_estoque.setModel(model)
