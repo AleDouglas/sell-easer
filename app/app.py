@@ -183,7 +183,7 @@ class Ui_MainWindow(object):
         self.label_codigo_2 = QtWidgets.QLabel(parent=self.page_9_editar_estoque)
         self.label_codigo_2.setGeometry(QtCore.QRect(10, 240, 71, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         font.setItalic(True)
         self.label_codigo_2.setFont(font)
@@ -199,7 +199,7 @@ class Ui_MainWindow(object):
         self.label_valor_compra_2 = QtWidgets.QLabel(parent=self.page_9_editar_estoque)
         self.label_valor_compra_2.setGeometry(QtCore.QRect(10, 330, 121, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_valor_compra_2.setFont(font)
         self.label_valor_compra_2.setStyleSheet("color: white;\n"
@@ -209,7 +209,7 @@ class Ui_MainWindow(object):
         self.label_nome_do_produto_2 = QtWidgets.QLabel(parent=self.page_9_editar_estoque)
         self.label_nome_do_produto_2.setGeometry(QtCore.QRect(10, 60, 141, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_nome_do_produto_2.setFont(font)
         self.label_nome_do_produto_2.setStyleSheet("color: white;\n"
@@ -219,7 +219,7 @@ class Ui_MainWindow(object):
         self.label_estoque_inicial_2 = QtWidgets.QLabel(parent=self.page_9_editar_estoque)
         self.label_estoque_inicial_2.setGeometry(QtCore.QRect(290, 330, 111, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_estoque_inicial_2.setFont(font)
         self.label_estoque_inicial_2.setStyleSheet("color: white;\n"
@@ -236,7 +236,7 @@ class Ui_MainWindow(object):
         self.label_descricao_do_produto_2 = QtWidgets.QLabel(parent=self.page_9_editar_estoque)
         self.label_descricao_do_produto_2.setGeometry(QtCore.QRect(10, 150, 381, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_descricao_do_produto_2.setFont(font)
         self.label_descricao_do_produto_2.setStyleSheet("color: white;\n"
@@ -253,7 +253,7 @@ class Ui_MainWindow(object):
         self.label_valor_venda_2 = QtWidgets.QLabel(parent=self.page_9_editar_estoque)
         self.label_valor_venda_2.setGeometry(QtCore.QRect(150, 330, 141, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_valor_venda_2.setFont(font)
         self.label_valor_venda_2.setStyleSheet("color: white;\n"
@@ -1106,7 +1106,7 @@ class Ui_MainWindow(object):
         self.label_cpf_2 = QtWidgets.QLabel(parent=self.page_10_editar_cliente)
         self.label_cpf_2.setGeometry(QtCore.QRect(10, 280, 201, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_cpf_2.setFont(font)
         self.label_cpf_2.setStyleSheet("color: black;\n"
@@ -1131,7 +1131,7 @@ class Ui_MainWindow(object):
         self.label_fone_2 = QtWidgets.QLabel(parent=self.page_10_editar_cliente)
         self.label_fone_2.setGeometry(QtCore.QRect(10, 370, 241, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_fone_2.setFont(font)
         self.label_fone_2.setStyleSheet("color: black;\n"
@@ -1150,7 +1150,7 @@ class Ui_MainWindow(object):
         self.label_email_2 = QtWidgets.QLabel(parent=self.page_10_editar_cliente)
         self.label_email_2.setGeometry(QtCore.QRect(10, 190, 201, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_email_2.setFont(font)
         self.label_email_2.setStyleSheet("color: black;\n"
@@ -1183,7 +1183,7 @@ class Ui_MainWindow(object):
         self.label_nome_completo_2.setGeometry(QtCore.QRect(10, 100, 201, 31))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         font.setItalic(False)
         self.label_nome_completo_2.setFont(font)
@@ -1297,7 +1297,7 @@ class Ui_MainWindow(object):
         self.label_title_carrinho.setMaximumSize(QtCore.QSize(16777215, 45))
         font = QtGui.QFont()
         font.setFamily("Ubuntu Condensed")
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_title_carrinho.setFont(font)
         self.label_title_carrinho.setStyleSheet("font-weight: bold;\n"
@@ -1493,7 +1493,7 @@ class Ui_MainWindow(object):
         self.label_nome_do_produto = QtWidgets.QLabel(parent=self.frame_2)
         self.label_nome_do_produto.setGeometry(QtCore.QRect(10, 60, 371, 41))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_nome_do_produto.setFont(font)
         self.label_nome_do_produto.setStyleSheet("color: white;\n"
@@ -1524,7 +1524,7 @@ class Ui_MainWindow(object):
         self.label_valor_venda = QtWidgets.QLabel(parent=self.frame_2)
         self.label_valor_venda.setGeometry(QtCore.QRect(171, 347, 141, 16))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_valor_venda.setFont(font)
         self.label_valor_venda.setStyleSheet("color: white;\n"
@@ -1534,7 +1534,7 @@ class Ui_MainWindow(object):
         self.label_estoque_inicial = QtWidgets.QLabel(parent=self.frame_2)
         self.label_estoque_inicial.setGeometry(QtCore.QRect(331, 347, 131, 16))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_estoque_inicial.setFont(font)
         self.label_estoque_inicial.setStyleSheet("color: white;\n"
@@ -1565,7 +1565,7 @@ class Ui_MainWindow(object):
         self.label_codigo = QtWidgets.QLabel(parent=self.frame_2)
         self.label_codigo.setGeometry(QtCore.QRect(9, 242, 231, 21))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         font.setItalic(True)
         self.label_codigo.setFont(font)
@@ -1576,7 +1576,7 @@ class Ui_MainWindow(object):
         self.label_descricao_do_produto = QtWidgets.QLabel(parent=self.frame_2)
         self.label_descricao_do_produto.setGeometry(QtCore.QRect(10, 160, 631, 16))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_descricao_do_produto.setFont(font)
         self.label_descricao_do_produto.setStyleSheet("color: white;\n"
@@ -1586,7 +1586,7 @@ class Ui_MainWindow(object):
         self.label_valor_compra = QtWidgets.QLabel(parent=self.frame_2)
         self.label_valor_compra.setGeometry(QtCore.QRect(10, 347, 141, 16))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_valor_compra.setFont(font)
         self.label_valor_compra.setStyleSheet("color: white;\n"
@@ -1660,7 +1660,7 @@ class Ui_MainWindow(object):
         self.label_nome_completo.setGeometry(QtCore.QRect(10, 60, 371, 41))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         font.setItalic(False)
         self.label_nome_completo.setFont(font)
@@ -1680,7 +1680,7 @@ class Ui_MainWindow(object):
         self.label_email = QtWidgets.QLabel(parent=self.frame_3)
         self.label_email.setGeometry(QtCore.QRect(10, 160, 201, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_email.setFont(font)
         self.label_email.setStyleSheet("color: black;\n"
@@ -1691,7 +1691,7 @@ class Ui_MainWindow(object):
         self.label_cpf = QtWidgets.QLabel(parent=self.frame_3)
         self.label_cpf.setGeometry(QtCore.QRect(10, 250, 201, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_cpf.setFont(font)
         self.label_cpf.setStyleSheet("color: black;\n"
@@ -1702,7 +1702,7 @@ class Ui_MainWindow(object):
         self.label_fone = QtWidgets.QLabel(parent=self.frame_3)
         self.label_fone.setGeometry(QtCore.QRect(10, 340, 241, 31))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_fone.setFont(font)
         self.label_fone.setStyleSheet("color: black;\n"
