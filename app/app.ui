@@ -327,7 +327,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <italic>true</italic>
           <bold>true</bold>
          </font>
@@ -369,7 +369,7 @@ font-weight: bold;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -393,7 +393,7 @@ font-size: 14px</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -417,7 +417,7 @@ font-size: 14px</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -457,7 +457,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -497,7 +497,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2618,7 +2618,7 @@ font-size: 24px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2680,7 +2680,7 @@ border-radius: 3px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2727,7 +2727,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2814,7 +2814,7 @@ font-size: 14px;</string>
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>-1</pointsize>
+          <pointsize>12</pointsize>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -3081,7 +3081,7 @@ font-weight: bold;</string>
              <property name="font">
               <font>
                <family>Ubuntu Condensed</family>
-               <pointsize>-1</pointsize>
+               <pointsize>12</pointsize>
                <bold>true</bold>
               </font>
              </property>
@@ -3516,7 +3516,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3591,7 +3591,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3615,7 +3615,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3690,7 +3690,7 @@ border-radius: 3px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <italic>true</italic>
              <bold>true</bold>
             </font>
@@ -3715,7 +3715,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3739,7 +3739,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3920,7 +3920,7 @@ font-weight: bold;</string>
            <property name="font">
             <font>
              <family>Arial</family>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <italic>false</italic>
              <bold>true</bold>
             </font>
@@ -3965,7 +3965,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3990,7 +3990,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -4015,7 +4015,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>-1</pointsize>
+             <pointsize>12</pointsize>
              <bold>true</bold>
             </font>
            </property>
