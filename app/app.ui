@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1201</width>
-    <height>860</height>
+    <width>1132</width>
+    <height>799</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1758,401 +1758,473 @@ border-radius: 5px;</string>
        </layout>
       </widget>
       <widget class="QWidget" name="finish_payment">
-       <widget class="QFrame" name="frame_20">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>30</y>
-          <width>1171</width>
-          <height>721</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 1px solid black;</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <widget class="QLabel" name="label_valor_total_compra">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>200</y>
-           <width>181</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Valor total da compra:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_metodo_pagamento">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>260</y>
-           <width>181</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Método de pagamento:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_troco">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>380</y>
-           <width>181</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Troco:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_parcelas">
-         <property name="geometry">
-          <rect>
-           <x>500</x>
-           <y>110</y>
-           <width>71</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Parcelas</string>
-         </property>
-        </widget>
-        <widget class="QTableView" name="table_parcelas">
-         <property name="geometry">
-          <rect>
-           <x>500</x>
-           <y>160</y>
-           <width>661</width>
-           <height>271</height>
-          </rect>
-         </property>
-         <property name="selectionBehavior">
-          <enum>QAbstractItemView::SelectRows</enum>
-         </property>
-         <attribute name="verticalHeaderVisible">
-          <bool>false</bool>
-         </attribute>
-         <attribute name="verticalHeaderHighlightSections">
-          <bool>false</bool>
-         </attribute>
-        </widget>
-        <widget class="QLabel" name="label_valor_total_3">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>200</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_metodo_pagamento_2">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>260</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_result_troco">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>380</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_valor_recebido">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>320</y>
-           <width>181</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Valor recebido:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_adicionar_taxa">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>150</y>
-           <width>181</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Adicionar Taxa ( % ):</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEdit_adicionar_taxa">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>150</y>
-           <width>111</width>
-           <height>41</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEdit_valor_recebido">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>320</y>
-           <width>101</width>
-           <height>41</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_finalizar_venda_2">
-         <property name="geometry">
-          <rect>
-           <x>880</x>
-           <y>530</y>
-           <width>282</width>
-           <height>50</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background: #0339A6;
+       <layout class="QHBoxLayout" name="horizontalLayout_13">
+        <item>
+         <widget class="QFrame" name="frame_20">
+          <property name="styleSheet">
+           <string notr="true">border: 1px solid black;</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <item>
+            <widget class="QFrame" name="frame_29">
+             <property name="minimumSize">
+              <size>
+               <width>500</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>500</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QPushButton" name="btn_calc_troco">
+              <property name="geometry">
+               <rect>
+                <x>330</x>
+                <y>250</y>
+                <width>141</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>41</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>41</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #0339A6;
 font-weight: bold;</string>
-         </property>
-         <property name="text">
-          <string>Finalizar</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_add_taxa">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>150</y>
-           <width>141</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background: #0339A6;
+              </property>
+              <property name="text">
+               <string>Calcular</string>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_valor_recebido">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>250</y>
+                <width>101</width>
+                <height>41</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_adicionar_taxa">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>80</y>
+                <width>111</width>
+                <height>41</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_valor_total_3">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>130</y>
+                <width>251</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btn_add_desconto">
+              <property name="geometry">
+               <rect>
+                <x>350</x>
+                <y>30</y>
+                <width>141</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>41</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>41</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #0339A6;
 font-weight: bold;</string>
-         </property>
-         <property name="text">
-          <string>Adicionar</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEdit_adicionar_parcelas">
-         <property name="geometry">
-          <rect>
-           <x>580</x>
-           <y>110</y>
-           <width>111</width>
-           <height>41</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_add_parcela">
-         <property name="geometry">
-          <rect>
-           <x>710</x>
-           <y>110</y>
-           <width>121</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background: #0339A6;
+              </property>
+              <property name="text">
+               <string>Adicionar</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_metodo_pagamento">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>190</y>
+                <width>181</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Método de pagamento:</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_adicionar_taxa">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>80</y>
+                <width>181</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Adicionar Taxa ( % ):</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btn_add_taxa">
+              <property name="geometry">
+               <rect>
+                <x>350</x>
+                <y>80</y>
+                <width>141</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>41</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>41</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #0339A6;
 font-weight: bold;</string>
-         </property>
-         <property name="text">
-          <string>Adicionar</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_calc_troco">
-         <property name="geometry">
-          <rect>
-           <x>320</x>
-           <y>320</y>
-           <width>141</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background: #0339A6;
-font-weight: bold;</string>
-         </property>
-         <property name="text">
-          <string>Calcular</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="error_registrar_venda_2">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>450</y>
-           <width>1141</width>
-           <height>60</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>60</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: red;
+              </property>
+              <property name="text">
+               <string>Adicionar</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_adicionar_desconto">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>30</y>
+                <width>181</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Adicionar Desconto ( % ):</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_valor_recebido">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>250</y>
+                <width>181</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Valor recebido:</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_troco">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>310</y>
+                <width>181</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Troco:</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_result_troco">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>310</y>
+                <width>251</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_valor_total_compra">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>130</y>
+                <width>181</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Valor total da compra:</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_metodo_pagamento_2">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>190</y>
+                <width>251</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_adicionar_desconto">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>30</y>
+                <width>111</width>
+                <height>41</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QLabel" name="error_registrar_venda_2">
+              <property name="geometry">
+               <rect>
+                <x>40</x>
+                <y>380</y>
+                <width>431</width>
+                <height>60</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>60</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: red;
 font-size: 12px;
 font-weight: bold;
 </string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_cancelar_venda_2">
-         <property name="geometry">
-          <rect>
-           <x>580</x>
-           <y>530</y>
-           <width>282</width>
-           <height>50</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background: red;
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_30">
+             <property name="styleSheet">
+              <string notr="true">border: 0;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_20">
+              <item>
+               <widget class="QFrame" name="frame_33">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>75</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>75</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border: 0;</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <widget class="QPushButton" name="btn_add_parcela">
+                 <property name="geometry">
+                  <rect>
+                   <x>230</x>
+                   <y>20</y>
+                   <width>121</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>41</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>41</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background: #0339A6;
 font-weight: bold;</string>
-         </property>
-         <property name="text">
-          <string>Cancelar</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_adicionar_desconto">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>100</y>
-           <width>181</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Adicionar Desconto ( % ):</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEdit_adicionar_desconto">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>100</y>
-           <width>111</width>
-           <height>41</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_add_desconto">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>100</y>
-           <width>141</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background: #0339A6;
+                 </property>
+                 <property name="text">
+                  <string>Adicionar</string>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="lineEdit_adicionar_parcelas">
+                 <property name="geometry">
+                  <rect>
+                   <x>110</x>
+                   <y>20</y>
+                   <width>111</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_parcelas">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>20</y>
+                   <width>71</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Parcelas</string>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_31">
+                <property name="styleSheet">
+                 <string notr="true">border: 0;</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <item>
+                  <widget class="QTableView" name="table_parcelas">
+                   <property name="selectionBehavior">
+                    <enum>QAbstractItemView::SelectRows</enum>
+                   </property>
+                   <attribute name="verticalHeaderVisible">
+                    <bool>false</bool>
+                   </attribute>
+                   <attribute name="verticalHeaderHighlightSections">
+                    <bool>false</bool>
+                   </attribute>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_32">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <item>
+                  <widget class="QPushButton" name="btn_cancelar_venda_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background: red;
 font-weight: bold;</string>
-         </property>
-         <property name="text">
-          <string>Adicionar</string>
-         </property>
-        </widget>
-       </widget>
+                   </property>
+                   <property name="text">
+                    <string>Cancelar</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_finalizar_venda_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background: #0339A6;
+font-weight: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string>Finalizar</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="end_finish_payment">
        <layout class="QVBoxLayout" name="verticalLayout_16">
