@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1075</width>
-    <height>779</height>
+    <width>1070</width>
+    <height>790</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>SellerEaser</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -261,7 +261,7 @@ QPushButton:hover
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_menu_config">
+        <widget class="QPushButton" name="btn_menu_log">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -284,7 +284,7 @@ QPushButton:hover
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string>Log</string>
          </property>
         </widget>
        </item>
@@ -327,7 +327,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <italic>true</italic>
           <bold>true</bold>
          </font>
@@ -369,7 +369,7 @@ font-weight: bold;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -393,7 +393,7 @@ font-size: 14px</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -417,7 +417,7 @@ font-size: 14px</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -457,7 +457,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -497,7 +497,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -998,7 +998,7 @@ font-weight: bold;</string>
           </widget>
           <widget class="QWidget" name="tab_4">
            <attribute name="title">
-            <string>Lucros</string>
+            <string>Lucro</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
@@ -1163,7 +1163,138 @@ text-align: center;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_10_success"/>
+      <widget class="QWidget" name="page_log">
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <item>
+         <widget class="QTableView" name="table_log">
+          <property name="styleSheet">
+           <string notr="true">border: 1px solid black;</string>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderHighlightSections">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frame_27">
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>250</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_19">
+           <item>
+            <widget class="QFrame" name="frame_28">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QLabel" name="label_6">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>50</y>
+                <width>211</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>De</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_7">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>150</y>
+                <width>211</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Até</string>
+              </property>
+             </widget>
+             <widget class="QDateEdit" name="dateEdit_9">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>100</y>
+                <width>211</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border: 1px solid black;
+color: black;
+font-weight: bold;
+</string>
+              </property>
+             </widget>
+             <widget class="QDateEdit" name="dateEdit_10">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>200</y>
+                <width>211</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border: 1px solid black;
+color: black;
+font-weight: bold;
+</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="log_filter_btn">
+              <property name="geometry">
+               <rect>
+                <x>30</x>
+                <y>250</y>
+                <width>171</width>
+                <height>61</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #0339A6;
+font-weight: bold;</string>
+              </property>
+              <property name="text">
+               <string>Filtrar</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="page_8_finalizar_venda">
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
@@ -1182,6 +1313,9 @@ text-align: center;</string>
             <widget class="QTableView" name="table_finalizar_venda">
              <property name="styleSheet">
               <string notr="true"/>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
              </property>
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
@@ -1367,6 +1501,12 @@ font-weight: bold;</string>
            </item>
            <item>
             <widget class="QTableView" name="table_search_client_carrinho">
+             <property name="selectionMode">
+              <enum>QAbstractItemView::SingleSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
@@ -1652,9 +1792,9 @@ border-radius: 5px;</string>
         <widget class="QLabel" name="label_valor_total_compra">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>10</x>
            <y>200</y>
-           <width>171</width>
+           <width>181</width>
            <height>41</height>
           </rect>
          </property>
@@ -1665,9 +1805,9 @@ border-radius: 5px;</string>
         <widget class="QLabel" name="label_metodo_pagamento">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>10</x>
            <y>260</y>
-           <width>171</width>
+           <width>181</width>
            <height>41</height>
           </rect>
          </property>
@@ -1678,9 +1818,9 @@ border-radius: 5px;</string>
         <widget class="QLabel" name="label_troco">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>10</x>
            <y>380</y>
-           <width>171</width>
+           <width>181</width>
            <height>41</height>
           </rect>
          </property>
@@ -1709,6 +1849,9 @@ border-radius: 5px;</string>
            <width>511</width>
            <height>271</height>
           </rect>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
          </property>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
@@ -1772,9 +1915,9 @@ border-radius: 5px;</string>
         <widget class="QLabel" name="label_valor_recebido">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>10</x>
            <y>320</y>
-           <width>171</width>
+           <width>181</width>
            <height>41</height>
           </rect>
          </property>
@@ -1785,9 +1928,9 @@ border-radius: 5px;</string>
         <widget class="QLabel" name="label_adicionar_taxa">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>140</y>
-           <width>171</width>
+           <x>10</x>
+           <y>150</y>
+           <width>181</width>
            <height>41</height>
           </rect>
          </property>
@@ -1799,7 +1942,7 @@ border-radius: 5px;</string>
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>140</y>
+           <y>150</y>
            <width>111</width>
            <height>41</height>
           </rect>
@@ -1842,7 +1985,7 @@ font-weight: bold;</string>
          <property name="geometry">
           <rect>
            <x>340</x>
-           <y>140</y>
+           <y>150</y>
            <width>141</width>
            <height>41</height>
           </rect>
@@ -1958,6 +2101,81 @@ font-weight: bold;
          </property>
          <property name="text">
           <string/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btn_cancelar_venda_2">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>530</y>
+           <width>282</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: red;
+font-weight: bold;</string>
+         </property>
+         <property name="text">
+          <string>Cancelar</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_adicionar_desconto">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>181</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Adicionar Desconto ( % ):</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_adicionar_desconto">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>100</y>
+           <width>111</width>
+           <height>41</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btn_add_desconto">
+         <property name="geometry">
+          <rect>
+           <x>340</x>
+           <y>100</y>
+           <width>141</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: #0339A6;
+font-weight: bold;</string>
+         </property>
+         <property name="text">
+          <string>Adicionar</string>
          </property>
         </widget>
        </widget>
@@ -2111,6 +2329,9 @@ border: 0;</string>
             <widget class="QTableView" name="table_ultimas_compras">
              <property name="styleSheet">
               <string notr="true"/>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
              </property>
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
@@ -2459,6 +2680,9 @@ font-size: 30px</string>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
@@ -2618,7 +2842,7 @@ font-size: 24px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2680,7 +2904,7 @@ border-radius: 3px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2727,7 +2951,7 @@ font-size: 14px;</string>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -2814,7 +3038,7 @@ font-size: 14px;</string>
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>12</pointsize>
+          <pointsize>-1</pointsize>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -2914,6 +3138,9 @@ font-size: 30px</string>
           </property>
           <property name="styleSheet">
            <string notr="true"/>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -3081,7 +3308,7 @@ font-weight: bold;</string>
              <property name="font">
               <font>
                <family>Ubuntu Condensed</family>
-               <pointsize>12</pointsize>
+               <pointsize>-1</pointsize>
                <bold>true</bold>
               </font>
              </property>
@@ -3130,6 +3357,9 @@ font-weight: bold;</string>
 color: white;
 text-align: center;
 border-radius: 0;</string>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
                 </property>
                 <attribute name="horizontalHeaderVisible">
                  <bool>true</bool>
@@ -3296,6 +3526,12 @@ border: 0;</string>
               </item>
               <item>
                <widget class="QLineEdit" name="lineEdit_cod_produto_carrinho">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3330,6 +3566,12 @@ border: 0;</string>
               </item>
               <item>
                <widget class="QLineEdit" name="lineEdit_qtd_produto_carrinho_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3346,6 +3588,12 @@ font-size: 24px;</string>
               </item>
               <item>
                <widget class="QPushButton" name="btn_add_carrinho">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3381,6 +3629,12 @@ border: 0;</string>
               </item>
               <item>
                <widget class="QLineEdit" name="lineEdit_id_remove_carrinho">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3400,6 +3654,12 @@ font-size: 24px;</string>
               </item>
               <item>
                <widget class="QPushButton" name="btn_remover_carrinho">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3429,6 +3689,12 @@ font-weight: bold;</string>
              <layout class="QVBoxLayout" name="verticalLayout_18">
               <item>
                <widget class="QPushButton" name="btn_finalizar_venda">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3447,6 +3713,12 @@ font-size: 18px;</string>
               </item>
               <item>
                <widget class="QPushButton" name="btn_cancelar_venda">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>40</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -3516,7 +3788,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3591,7 +3863,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3615,7 +3887,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3690,7 +3962,7 @@ border-radius: 3px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <italic>true</italic>
              <bold>true</bold>
             </font>
@@ -3715,7 +3987,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3739,7 +4011,7 @@ font-size: 14px</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3920,7 +4192,7 @@ font-weight: bold;</string>
            <property name="font">
             <font>
              <family>Arial</family>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <italic>false</italic>
              <bold>true</bold>
             </font>
@@ -3965,7 +4237,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -3990,7 +4262,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -4015,7 +4287,7 @@ font-size: 14px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
            </property>

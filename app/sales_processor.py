@@ -90,7 +90,7 @@ class SalesProcessor:
             return False
         return int(product["stock"].values[0]) >= int(quantity)
 
-    def create_sale(self, client_id, total_price, profit,payment, installment, tax):
+    def create_sale(self, client_id, total_price, profit,payment, installment, tax, discount):
         """
         Cria uma nova venda no banco de dados.
 
@@ -102,9 +102,10 @@ class SalesProcessor:
             payment (int): Forma de pagamento da compra.
             installment (int): Número de parcelas da compra.
             tax (float): Taxa de juros da compra.
+            discount (float): Desconto da compra.
         """
         sale_date = datetime.now().strftime("%Y-%m-%d")
-        sale_id = self.db.insert_sale(customer_id=client_id, total_value=total_price, profit=profit, sale_date=sale_date, payment=payment, installment=installment, tax=tax)
+        sale_id = self.db.insert_sale(customer_id=client_id, total_value=total_price, profit=profit, sale_date=sale_date, payment=payment, installment=installment, tax=tax, discount=discount)
         
         return sale_id
 
@@ -238,3 +239,17 @@ class SalesProcessor:
             return sale
         sale = self.db.fetch_by_id(table_name = "Sales", record_id = sale_id)
         return sale
+    
+    def search_log(self, log_id=None):
+        """
+        Busca um log no banco de dados pelo ID.
+
+        Args:
+            self.db (DatabaseManager): Instância do gerenciador do banco de dados.
+            log_id (int): ID do log a ser buscado.
+        """
+        if log_id is None:
+            log = self.db.fetch_all(table_name = "Logs")
+            return log
+        log = self.db.fetch_by_id(table_name = "Logs", record_id = log_id)
+        return log

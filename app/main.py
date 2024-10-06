@@ -58,21 +58,24 @@ class MainWindow(QMainWindow):
         carrinho_tmp = self.carrinho.copy()
         carrinho_tmp.columns = ["ID", "Nome", "Código", "Preço de Venda", "Estoque", "Quantidade"]
         self.clientes = pd.DataFrame(columns=["id", "name", "cpf"])
+        
         self.controle_de_estoque = pd.DataFrame(columns=["id", "name", "code", "stock"])
         self.table_estoque = pd.DataFrame(columns=["id", "name", "code", "description", "purchase_price", "sale_price", "stock"])
         estoque_tmp = self.table_estoque.copy()
         estoque_tmp.columns = ["ID", "Nome", "Código", "Descrição", "Preço de Compra", "Preço de Venda", "Estoque"]
         self.vendas = pd.DataFrame(columns=["id", "client_id", "sale_date", "total_value"])
         self.table_vendas = pd.DataFrame(columns=["id", "client_id", "sale_date", "total_value", "payment", "installment", "tax"])
+        self.table_log_pd = pd.DataFrame(columns=["ID", "Operação", "Data"])
         self.cliente = None
         self.produto = None
         self.payment_method = 1
         self.taxa = 0
+        self.desconto = 0
         self.profit = 0
         self.installment = 1
         self.value_total = 0
         self.purchase_total = 0
-        self.installment_table = pd.DataFrame(columns=["N de Parcelas", "Valor das Parcelas", "Taxa"])
+        self.installment_table = pd.DataFrame(columns=["N de Parcelas", "Valor das Parcelas", "Taxa", "Desconto"])
         self.payment_names = {
             0: "Dinheiro",
             1: "Cartão de Crédito",
@@ -109,12 +112,17 @@ class MainWindow(QMainWindow):
         self.ui.table_estoque.setModel(PandasModel(estoque_tmp))
         self.ui.table_ultimas_compras.setModel(PandasModel(self.table_vendas))
         self.ui.table_parcelas.setModel(PandasModel(self.installment_table))
+        self.ui.table_log.setModel(PandasModel(self.table_log_pd))
         # Configuração para preencher a largura da QTableView
         header = self.ui.carrinho_table.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)  # Faz com que as colunas preencham 100% da largura
         
         header_2 = self.ui.table_search_client_carrinho.horizontalHeader()
         header_2.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        
+        model = self.buscar_cliente('')
+        model.columns = ["ID", "Nome", "CPF"]
+        self.ui.table_search_client_carrinho.setModel(model)
         
         header_25 = self.ui.table_clientes.horizontalHeader()
         header_25.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
@@ -131,6 +139,9 @@ class MainWindow(QMainWindow):
         header_6 = self.ui.table_parcelas.horizontalHeader()
         header_6.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         
+        header_7 = self.ui.table_log.horizontalHeader()
+        header_7.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        
 
         # Inicializando Botões do Menu Principal
         self.ui.btn_menu_inicio.clicked.connect(self.go_to_inicial_page)
@@ -140,7 +151,8 @@ class MainWindow(QMainWindow):
         self.ui.btn_menu_estoque.clicked.connect(self.go_to_controle_estoque)
         self.ui.btn_menu_clientes.clicked.connect(self.clientes_table)
         self.ui.btn_menu_relatorio.clicked.connect(self.go_to_relatorios)
-        #self.ui.btn_menu_config.clicked.connect(self.go_to_configuracoes)
+        self.ui.btn_menu_log.clicked.connect(self.go_to_log_page)
+        
         
         
         # Inicializando Botões das Funcionalidades dentro do Sistema
@@ -162,6 +174,7 @@ class MainWindow(QMainWindow):
         self.ui.pix_btn.clicked.connect(self.select_pix)
         self.ui.btn_add_parcela.clicked.connect(self.add_installment)
         self.ui.btn_add_taxa.clicked.connect(self.add_tax)
+        self.ui.btn_add_desconto.clicked.connect(self.add_discount)
         self.ui.btn_calc_troco.clicked.connect(self.add_troco)
         
         self.ui.btn_buscar_compra.clicked.connect(self.buscar_compra)
@@ -181,8 +194,14 @@ class MainWindow(QMainWindow):
         self.ui.btn_cancelar_op_cadastrar_produto.clicked.connect(self.cancelar_op_cadastrar_produto) # Botão de cancelar operação de cadastro de produto
         self.ui.btn_menu_cancel_insert_client.clicked.connect(self.cancelar_op_cadasatrar_cliente) # Botão de cancelar operação de cadastro de cliente
         self.ui.btn_cancelar_venda.clicked.connect(self.cancelar_op_registrar_venda) # Botão de cancelar operação de venda
+        self.ui.btn_cancelar_venda_2.clicked.connect(self.cancelar_op_registrar_venda) # Botão de cancelar operação de finalizar venda
         self.ui.btn_menu_cancel_insert_produto_2.clicked.connect(self.cancelar_op_editar_produto) # Botão de cancelar operação de edição de produto
         self.ui.btn_finalizar_venda_3.clicked.connect(self.cancelar_op_registrar_venda) # Botão de cancelar operação de edição de produto
+        
+        
+        # LOG PAGE
+        self.ui.log_filter_btn.clicked.connect(self.filter_log)
+        
         # Iniciando Temas
         self.default_theme(
             title_size="font-size: 30px; font-weight: bold;", 
@@ -354,7 +373,7 @@ class MainWindow(QMainWindow):
         
         ax = fig.add_subplot(111)
         ax.plot(vendas_diarias['sale_date'].astype(str), vendas_diarias['cumulative_profit'], marker='o', linestyle='-', color='b')
-        ax.set_title("Lucros Diários ( Mês Atual )")
+        ax.set_title("Lucro por Dia ( Mês Atual )")
         ax.set_ylabel("Lucro ( R$ )")
         ax.grid(True)
         
@@ -419,10 +438,10 @@ class MainWindow(QMainWindow):
         ax = fig.add_subplot(111)
         if sale_month_qtd > 1:
             ax.plot(vendas_diarias['sale_month'].astype(str), vendas_diarias['cumulative_profit'], marker='o', linestyle='-', color='b')
-            ax.set_title("Lucros Mensais")
+            ax.set_title("Lucro por Mês")
         else:
             ax.plot(vendas_diarias['sale_date'].astype(str), vendas_diarias['cumulative_profit'], marker='o', linestyle='-', color='b')
-            ax.set_title("Lucros Diários ( Mês Atual )")
+            ax.set_title("Lucro por Dia ( Mês Atual )")
         ax.set_ylabel("Lucro ( R$ )")
         ax.grid(True)
         
@@ -664,7 +683,7 @@ class MainWindow(QMainWindow):
         # Convertendo valores para payment_names no método de pagamento
         ultimas_vendas["payment"] = ultimas_vendas["payment"].map(self.payment_names)
         # Renomeando as colunas
-        ultimas_vendas.columns = ["ID da Venda", "ID Cliente", "Valor Total ( R$ )", "Lucro", "Parcelas", "Método de Pagamento", "Taxa de Juros (%)", "Data da Venda"]
+        ultimas_vendas.columns = ["ID da Venda", "ID Cliente", "Valor Total ( R$ )", "Lucro", "Parcelas", "Método de Pagamento", "Taxa de Juros (%)", "Desconto (%)","Data da Venda"]
         
         
         self.ui.table_ultimas_compras.setModel(PandasModel(ultimas_vendas))
@@ -728,6 +747,44 @@ class MainWindow(QMainWindow):
             return
         
         self.ui.stackedWidget.setCurrentWidget(self.ui.payment_method)
+       
+    def go_to_log_page(self):
+        '''
+        Método para mudar para a página de log
+        '''
+        
+        # Buscando o log
+        self.table_log_pd = self.sales_processor.search_log()
+        # log
+        log = self.table_log_pd.copy()
+        # Alterando o nome das colunas
+        log.columns = ["ID", "Operação", "Data"]
+        # Gerando o modelo
+        model = PandasModel(log)
+        # Atualizando a tabela
+        self.ui.table_log.setModel(model)
+        
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page_log)
+        
+    def filter_log(self):
+        '''
+        Método para filtrar o log
+        '''
+        date_from = self.ui.dateEdit_9.text()
+        date_to = self.ui.dateEdit_10.text()
+        
+        # Buscando o log no dataframe
+        log = self.table_log_pd.copy()
+        # Convertendo as datas para o formato datetime
+        log["datetime"] = pd.to_datetime(log["datetime"])
+        # Filtrando as datas
+        log = log[(log["datetime"] >= date_from) & (log["datetime"] <= date_to)]
+        # Alterando o nome das colunas
+        log.columns = ["ID", "Operação", "Data"]
+        # Gerando o modelo
+        model = PandasModel(log)
+        # Atualizando a tabela
+        self.ui.table_log.setModel(model)
         
     def select_money(self):
         '''
@@ -736,14 +793,16 @@ class MainWindow(QMainWindow):
         self.payment_method = 0
         self.installment = 1
         self.taxa = 0
+        self.desconto = 0
         self.ui.label_metodo_pagamento_2.setText("Dinheiro")
         self.ui.stackedWidget.setCurrentWidget(self.ui.finish_payment)
         
         # Preenchendo a tabela de parcelas, como o pagamento é à vista, só terá uma parcela
         self.installment_table = pd.DataFrame({
             "N de Parcelas": [1],
-            "Valor das Parcelas": [self.value_total],
-            "Taxa": [0]
+            "Valor das Parcelas ( R$ )": [self.value_total],
+            "Taxa %": [0],
+            "Desconto %": [0]
         })
 
         # Atualizando o modelo e exibindo a tabela na interface
@@ -757,14 +816,16 @@ class MainWindow(QMainWindow):
         self.payment_method = 1
         self.installment = 1
         self.taxa = 0
+        self.desconto = 0
         self.ui.label_metodo_pagamento_2.setText("Cartão de Crédito")
         self.ui.stackedWidget.setCurrentWidget(self.ui.finish_payment)
         
         # Preenchendo a tabela de parcelas, como o pagamento é à vista, só terá uma parcela
         self.installment_table = pd.DataFrame({
             "N de Parcelas": [1],
-            "Valor das Parcelas": [self.value_total],
-            "Taxa": [0]
+            "Valor das Parcelas ( R$ )": [self.value_total],
+            "Taxa %": [0],
+            "Desconto %": [0]
         })
 
         # Atualizando o modelo e exibindo a tabela na interface
@@ -778,14 +839,16 @@ class MainWindow(QMainWindow):
         self.payment_method = 2
         self.installment = 1
         self.taxa = 0
+        self.desconto = 0
         self.ui.label_metodo_pagamento_2.setText("Cartão de Débito")
         self.ui.stackedWidget.setCurrentWidget(self.ui.finish_payment)
         
         # Preenchendo a tabela de parcelas, como o pagamento é à vista, só terá uma parcela
         self.installment_table = pd.DataFrame({
             "N de Parcelas": [1],
-            "Valor das Parcelas": [self.value_total],
-            "Taxa": [0]
+            "Valor das Parcelas ( R$ )": [self.value_total],
+            "Taxa %": [0],
+            "Desconto %": [0]
         })
 
         # Atualizando o modelo e exibindo a tabela na interface
@@ -799,14 +862,16 @@ class MainWindow(QMainWindow):
         self.payment_method = 3
         self.installment = 1
         self.taxa = 0
+        self.desconto = 0
         self.ui.label_metodo_pagamento_2.setText("PIX")
         self.ui.stackedWidget.setCurrentWidget(self.ui.finish_payment)
         
         # Preenchendo a tabela de parcelas, como o pagamento é à vista, só terá uma parcela
         self.installment_table = pd.DataFrame({
             "N de Parcelas": [1],
-            "Valor das Parcelas": [self.value_total],
-            "Taxa": [0]
+            "Valor das Parcelas ( R$ )": [self.value_total],
+            "Taxa %": [0],
+            "Desconto %": [0]
         })
 
         # Atualizando o modelo e exibindo a tabela na interface
@@ -837,10 +902,47 @@ class MainWindow(QMainWindow):
         parcelas = [self.installment]
         valores = [self.value_total / self.installment]
         taxas = [self.taxa]
+        desconto = [self.desconto]
         self.installment_table = pd.DataFrame({
             "N de Parcelas": self.installment,
-            "Valor das Parcelas": valores,
-            "Taxa": taxas
+            "Valor das Parcelas ( R$ )": valores,
+            "Taxa %": taxas,
+            "Desconto %": desconto
+        })
+        
+        # Atualizando a tabela de parcelas
+        model = PandasModel(self.installment_table)
+        self.ui.table_parcelas.setModel(model)
+        
+    def add_discount(self):
+        value = self.ui.lineEdit_adicionar_desconto.text()
+        total = self.value_total
+        if value == "":
+            value = 0
+        try:
+            if not value.replace(".", "", 1).isdigit():
+                value = 0
+        except:
+            value = 0
+        
+        # Removendo o desconto anterior
+        self.value_total = ( total * 100 ) / ( 100 - self.desconto )
+        # Calculando a diferença para reduzir do self.purchase_total
+        # Atualizando o valor do desconto
+        self.desconto = float(value)
+        self.value_total = self.value_total - (self.value_total * (self.desconto / 100))
+        # Atualizando os valores na interface
+        self.ui.label_valor_total_3.setText(f"R${self.value_total:.2f}")
+        # Atualizando a tabela de parcelas
+        parcelas = [self.installment]
+        valores = [self.value_total / self.installment]
+        taxas = [self.taxa]
+        desconto = [self.desconto]
+        self.installment_table = pd.DataFrame({
+            "N de Parcelas": parcelas,
+            "Valor das Parcelas ( R$ )": valores,
+            "Taxa %": taxas,
+            "Desconto %": desconto
         })
         
         # Atualizando a tabela de parcelas
@@ -862,10 +964,12 @@ class MainWindow(QMainWindow):
         parcelas = [self.installment]
         valores = [self.value_total / self.installment]  
         taxas = [self.taxa]
+        desconto = [self.desconto]
         self.installment_table = pd.DataFrame({
             "N de Parcelas": parcelas,
-            "Valor das Parcelas": valores,
-            "Taxa": taxas
+            "Valor das Parcelas ( R$ )": valores,
+            "Taxa %": taxas,
+            "Desconto %": desconto
         })
         
         # Atualizando a tabela de parcelas
@@ -938,7 +1042,6 @@ class MainWindow(QMainWindow):
         
         self.ui.stackedWidget.setCurrentWidget(self.ui.end_finish_payment)
         
-        
     def cancelar_op_cadastrar_produto(self):
         '''
         Método para limpar os campos do formulário de cadastro de produto
@@ -966,7 +1069,7 @@ class MainWindow(QMainWindow):
         Método para limpar os campos do formulário de registrar venda
         '''
         self.ui.lineEdit_cod_produto_carrinho.setText("")
-        self.ui.lineEdit_qtd_produto_carrinho_2.setText("")
+        self.ui.lineEdit_qtd_produto_carrinho_2.setText("1")
         self.ui.error_registrar_venda.setText("")
         ''' Limpar o carrinho '''
         self.carrinho = pd.DataFrame(columns=["id","name", "code", "sale_price", "stock", "quantity", "purchase_price"])
@@ -976,8 +1079,11 @@ class MainWindow(QMainWindow):
         tmp_carrinho = self.carrinho.copy()
         tmp_carrinho.columns = ["ID", "Nome", "Código", "Preço de Venda", "Estoque", "Quantidade", "Preço de Compra Total"]
         model = PandasModel(tmp_carrinho)
+        tmp_cliente = self.clientes.copy()
+        tmp_cliente.columns = ["ID", "Nome", "CPF"]
+        model_client = PandasModel(tmp_cliente)
         self.ui.carrinho_table.setModel(model)
-        self.ui.table_search_client_carrinho.setModel(model)
+        self.ui.table_search_client_carrinho.setModel(model_client)
         self.ui.table_finalizar_venda.setModel(model)
         # Atualizando os valores na interface
         self.ui.label_qtd_itens_carrinho.setText("0")
@@ -986,6 +1092,7 @@ class MainWindow(QMainWindow):
         self.ui.label_valor_total_carrinho_2.setText("R$0.00")
         self.ui.label_valor_total_3.setText("R$0.00")
         self.value_total = 0
+        self.purchase_total = 0
         
         self.go_to_registrar_venda()
         
@@ -1121,6 +1228,7 @@ class MainWindow(QMainWindow):
             cliente = self.sales_processor.search_client(name)
         # Manter apenas as colunas id, name e cpf
         cliente = cliente[["id", "name", "cpf"]]
+        cliente.columns = ["ID", "Nome", "CPF"]
         # Preenchendo tabela table_search_client_carrinho com os resultados
         model = PandasModel(cliente)
         return model
@@ -1159,7 +1267,7 @@ class MainWindow(QMainWindow):
                 
             profit = self.value_total - self.purchase_total
             # Processa a venda
-            venda = self.sales_processor.create_sale(client_id=cliente, total_price=self.value_total, profit = profit, payment=int(self.payment_method), installment=int(self.installment), tax=float(self.taxa))
+            venda = self.sales_processor.create_sale(client_id=cliente, total_price=self.value_total, profit = profit, payment=int(self.payment_method), installment=int(self.installment), tax=float(self.taxa), discount=float(self.desconto))
             # Processa a venda de cada produto
             for index, row in produtos.iterrows():
                 quantity = int(row["quantity"])
@@ -1357,7 +1465,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_menu_estoque.setStyleSheet(f"{menu_top_button}")
         self.ui.btn_menu_clientes.setStyleSheet(f"{menu_top_button}")
         self.ui.btn_menu_relatorio.setStyleSheet(f"{menu_top_button}")
-        self.ui.btn_menu_config.setStyleSheet(f"{menu_top_button}")
+        self.ui.btn_menu_log.setStyleSheet(f"{menu_top_button}")
         self.ui.btn_menu_inicio.setStyleSheet(f"{menu_top_button}")
         
         
@@ -1374,6 +1482,7 @@ class MainWindow(QMainWindow):
         # Alterando o estilo dos botões de deletar
         self.ui.btn_deletar_cliente.setStyleSheet(f"{delete_button_style}")
         self.ui.btn_cancelar_venda.setStyleSheet(f"{delete_button_style}")
+        self.ui.btn_cancelar_venda_2.setStyleSheet(f"{delete_button_style}")
         self.ui.btn_menu_cancel_insert_produto_2.setStyleSheet(f"{delete_button_style}")
         
         # Alterando o estilo dos botões de finalizar
@@ -1457,11 +1566,19 @@ class MainWindow(QMainWindow):
         self.ui.title_op_realizada.setStyleSheet(f"{font_color}{title_size}")
         
         self.ui.btn_add_taxa.setStyleSheet(f"{finish_button_style}")
+        self.ui.btn_add_desconto.setStyleSheet(f"{finish_button_style}")
         self.ui.btn_add_parcela.setStyleSheet(f"{finish_button_style}")
         
+        self.ui.label_adicionar_desconto.setStyleSheet(f"{font_color}")
         
+        self.ui.lineEdit_adicionar_desconto.setStyleSheet(f"{background_lineedit}")
         self.ui.lineEdit_adicionar_taxa.setStyleSheet(f"{background_lineedit}")
         self.ui.lineEdit_valor_recebido.setStyleSheet(f"{background_lineedit}")
+        
+        self.ui.label_6.setStyleSheet(f"{font_color}")
+        self.ui.label_7.setStyleSheet(f"{font_color}")
+        self.ui.dateEdit_9.setStyleSheet(f"{background_lineedit}")
+        self.ui.dateEdit_10.setStyleSheet(f"{background_lineedit}")
         
         table_style = """
             QTableView {
@@ -1473,10 +1590,11 @@ class MainWindow(QMainWindow):
                 
             }
             QHeaderView::section {
-                color: black;
+                color: white;
                 padding: 4px;
                 font-weight: bold;
                 border: 1px solid black;
+                background-color: black;
             }
             QTableView::item {
                 padding: 4px;
@@ -1484,6 +1602,7 @@ class MainWindow(QMainWindow):
         """
         
         ''' TABELAS '''
+        self.ui.table_log.setStyleSheet(table_style)
         self.ui.table_search_client_carrinho.setStyleSheet(table_style)
         self.ui.table_ultimas_compras.setStyleSheet(table_style)
         

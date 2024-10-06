@@ -12,6 +12,7 @@ Além disso, será responsável por criar as tabelas necessárias, fazer consult
 import sqlite3
 import pandas as pd
 import random
+from datetime import datetime
 
 
 class DatabaseManager:
@@ -61,6 +62,7 @@ class DatabaseManager:
                 installment INTEGER DEFAULT 1,
                 payment INTEGER DEFAULT 1,
                 tax REAL DEFAULT 0.0,
+                discount REAL DEFAULT 0.0,
                 sale_date TEXT NOT NULL,
                 FOREIGN KEY (customer_id) REFERENCES Customer(id)
             )
@@ -78,10 +80,36 @@ class DatabaseManager:
             )
         ''')
         print("Database progress.....\033[92mOk\033[0m")
+        # Cria a tabela responsável por armazenar os logs de operações
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS Logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                text TEXT NOT NULL,
+                datetime TEXT NOT NULL
+            )
+        ''')
+        print("Database progress.....\033[92mOk\033[0m")
         # Salva as alterações no banco de dados
         self.connection.commit()
         print("Commit progress.....\033[92mOk\033[0m")
-
+        
+        
+    # Método criar um log de operação
+    def create_log(self, text):
+        """
+        Cria um log de operação no banco de dados.
+        
+        Args:
+            text (str): Texto do log a ser registrado.
+        """
+        datetime_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        query = '''
+            INSERT INTO Logs (text, datetime)
+            VALUES (?, ?)
+        '''
+        self.cursor.execute(query, (text, datetime_str))
+        self.connection.commit()
+    
     # Método para consultar todos os registros de uma tabela e retornar como DataFrame
     def fetch_all(self, table_name):
         """
@@ -164,6 +192,9 @@ class DatabaseManager:
         '''
         self.cursor.execute(query, (name, cpf, email, phone))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Novo cliente cadastrado: {name} ({cpf})")
 
     # Método para inserir um novo produto na tabela Product
     def insert_product(self, name, description, code, purchase_price, sale_price, stock=0):
@@ -184,9 +215,12 @@ class DatabaseManager:
         '''
         self.cursor.execute(query, (name, description, code, purchase_price, sale_price, stock))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Novo produto cadastrado: {name} ({code})")
 
     # Método para inserir uma nova venda na tabela Sales
-    def insert_sale(self, customer_id, total_value, profit,sale_date, installment=1, payment=1, tax=0.0):
+    def insert_sale(self, customer_id, total_value, profit,sale_date, installment=1, payment=1, tax=0.0, discount=0.0):
         """
         Insere uma nova venda na tabela Sales.
         
@@ -197,21 +231,28 @@ class DatabaseManager:
             installment (int): Número de parcelas da compra.
             payment (int): Forma de pagamento da compra.
             tax (float): Taxa de juros da compra.
+            discount (float): Desconto aplicado na compra.
             sale_date (str): Data da venda (formato: 'YYYY-MM-DD').
         
         Returns:
             int: ID da venda inserida, para ser usada na tabela SalesProduct.
         """
         query = '''
-            INSERT INTO Sales (customer_id, total_value, profit, sale_date, installment, payment, tax)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO Sales (customer_id, total_value, profit, sale_date, installment, payment, tax, discount)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         '''
         
         if installment < 1:
             installment = 1
+            
+        total_value = round(total_value, 2)
         
-        self.cursor.execute(query, (customer_id, total_value, profit, sale_date, installment, payment, tax))
+        self.cursor.execute(query, (customer_id, total_value, profit, sale_date, installment, payment, tax, discount))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Nova venda realizada - ID: {self.cursor.lastrowid}")
+        
         return self.cursor.lastrowid  # Retorna o ID da venda inserida
 
     # Método para inserir produtos vendidos na tabela SalesProduct
@@ -260,6 +301,9 @@ class DatabaseManager:
         '''
         self.cursor.execute(query, (name, cpf, email, phone, customer_id))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Cliente editado - ID: {customer_id}")
 
     # Método para editar um produto na tabela Product
     def update_product(self, product_id, name=None, description=None, code=None, purchase_price=None, sale_price=None, stock=None):
@@ -289,9 +333,12 @@ class DatabaseManager:
         # Ajuste da ordem dos parâmetros
         self.cursor.execute(query, (name, description, code, purchase_price, sale_price, stock, int(product_id)))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Produto editado - ID: {product_id}")
 
     # Método para editar uma venda na tabela Sales
-    def update_sale(self, sale_id, customer_id=None, total_value=None, profit=None,sale_date=None, installment=None, payment=None, tax=None):
+    def update_sale(self, sale_id, customer_id=None, total_value=None, profit=None,sale_date=None, installment=None, payment=None, tax=None, discount=None):
         """
         Edita uma venda existente na tabela Sales.
         
@@ -302,7 +349,8 @@ class DatabaseManager:
             profit (float, opcional): Novo lucro da venda.
             installment (int, opcional): Novo número de parcelas da compra.
             payment (int, opcional): Nova forma de pagamento da compra.
-            tax (float, opcional): Nova taxa de juros da compra
+            tax (float, opcional): Nova taxa de juros da compra.
+            discount (float, opcional): Novo desconto aplicado na compra.
             sale_date (str, opcional): Nova data da venda (formato: 'YYYY-MM-DD').
         """
         query = '''
@@ -314,10 +362,14 @@ class DatabaseManager:
                 installment = COALESCE(?, installment),
                 payment = COALESCE(?, payment),
                 tax = COALESCE(?, tax)
+                discount = COALESCE(?, discount)
             WHERE id = ?
         '''
-        self.cursor.execute(query, (customer_id, total_value, profit, sale_date, sale_id, installment, payment, tax))
+        self.cursor.execute(query, (customer_id, total_value, profit, sale_date, sale_id, installment, payment, tax, discount))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Venda editada - ID: {sale_id}")
 
     # Método para editar produtos vendidos na tabela SalesProduct
     def update_sales_product(self, sales_product_id, sale_id=None, product_id=None, quantity=None):
@@ -339,6 +391,9 @@ class DatabaseManager:
         '''
         self.cursor.execute(query, (sale_id, product_id, quantity, sales_product_id))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Registro de venda editado - ID: {sales_product_id}")
 
     # Método para deletar um cliente na tabela Customer
     def delete_customer(self, customer_id):
@@ -354,6 +409,11 @@ class DatabaseManager:
         '''
         self.cursor.execute(query, (customer_id,))
         self.connection.commit()
+        
+        cliente = self.fetch_by_id("Customer", customer_id)
+        
+        # Gerando log de operação
+        self.create_log(f"Cliente deletado: {cliente['name'].values[0]} ({cliente['cpf'].values[0]})")
 
     # Método para deletar um produto na tabela Product
     def delete_product(self, product_id):
@@ -369,6 +429,11 @@ class DatabaseManager:
         '''
         self.cursor.execute(query, (product_id,))
         self.connection.commit()
+        
+        produto = self.fetch_by_id("Product", product_id)
+        
+        # Gerando log de operação
+        self.create_log(f"Produto deletado: {produto['name'].values[0]} ({produto['code'].values[0]})")
 
     # Método para deletar uma venda na tabela Sales
     def delete_sale(self, sale_id):
@@ -390,6 +455,9 @@ class DatabaseManager:
             WHERE id = ?
         ''', (sale_id,))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Venda deletada - ID: {sale_id}")
 
     # Método para deletar um registro na tabela SalesProduct
     def delete_sales_product(self, sales_product_id):
@@ -405,13 +473,15 @@ class DatabaseManager:
         '''
         self.cursor.execute(query, (sales_product_id,))
         self.connection.commit()
+        
+        # Gerando log de operação
+        self.create_log(f"Registro de venda deletado - ID: {sales_product_id}")
 
     # Método para fechar a conexão com o banco de dados
     def close_connection(self):
         # Fecha a conexão com o banco de dados
         self.connection.close()
 
-from datetime import datetime
 
 ''' Criando banco de dados para teste '''
 def populate_test_database(db_manager):
@@ -427,7 +497,6 @@ def populate_test_database(db_manager):
         {"name": "Jane Smith", "cpf": "98765432100", "email": "jane@example.com", "phone": "2222222222"},
         {"name": "Alice Johnson", "cpf": "11223344556", "email": "alice@example.com", "phone": "3333333333"},
         {"name": "Bob Brown", "cpf": "66778899000", "email": "bob@example.com", "phone": "4444444444"},
-        
     ]
     
     # Inserindo clientes
@@ -446,10 +515,13 @@ def populate_test_database(db_manager):
     for product in products:
         db_manager.insert_product(product['name'], product['description'], product['code'], product['purchase_price'], product['sale_price'], product['stock'])
 
+    i = 1
     # Gerando vendas aleatórias
     for _ in range(5):  # Vamos gerar 5 vendas
         customer_id = random.randint(1, len(customers))  # Seleciona um cliente aleatoriamente
-        sale_date = datetime.now().strftime("%Y-%m-%d")
+        # Gerando sale date do mês até o 5  ( utilizar o i )
+        sale_date = datetime.now().replace(month=i).strftime("%Y-%m-%d")
+        i += 1
         total_value = 0
         profit = 0
 
