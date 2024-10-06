@@ -517,7 +517,7 @@ def populate_test_database(db_manager):
 
     i = 1
     # Gerando vendas aleatórias
-    for _ in range(5):  # Vamos gerar 5 vendas
+    for _ in range(12):  # Vamos gerar 5 vendas
         customer_id = random.randint(1, len(customers))  # Seleciona um cliente aleatoriamente
         # Gerando sale date do mês até o 5  ( utilizar o i )
         sale_date = datetime.now().replace(month=i).strftime("%Y-%m-%d")
@@ -541,6 +541,32 @@ def populate_test_database(db_manager):
         for product_id, quantity in zip(product_ids, quantities):
             db_manager.insert_sales_product(sale_id, product_id, quantity)
     
+    # Gerando vendas aleatórias para o mês atual
+    # Gerando vendas aleatórias
+    i = 1
+    for _ in range(20):  # Vamos gerar 5 vendas
+        customer_id = random.randint(1, len(customers))  # Seleciona um cliente aleatoriamente
+        # Gerando sale date do mês até o 5  ( utilizar o i )
+        sale_date = datetime.now().replace(day=i).strftime("%Y-%m-%d")
+        i += 1
+        total_value = 0
+        profit = 0
+
+        # Seleciona de 1 a 3 produtos para a venda
+        product_ids = random.sample(range(1, len(products) + 1), random.randint(1, 3))
+        quantities = [random.randint(1, 5) for _ in product_ids]
+
+        # Calcula o valor total da venda e o lucro
+        for product_id, quantity in zip(product_ids, quantities):
+            product = db_manager.fetch_by_id("Product", product_id).iloc[0]
+            total_value += product['sale_price'] * quantity
+            profit += (product['sale_price'] - product['purchase_price']) * quantity
+
+        # Insere a venda e associa os produtos
+        sale_id = db_manager.insert_sale(customer_id, total_value, profit, sale_date)
+        
+        for product_id, quantity in zip(product_ids, quantities):
+            db_manager.insert_sales_product(sale_id, product_id, quantity)
     print("Banco de dados de testes populado com sucesso!")
     
 

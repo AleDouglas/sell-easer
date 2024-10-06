@@ -239,9 +239,14 @@ class MainWindow(QMainWindow):
         # Filtrar datas
         if date_from is not None and date_to is not None:
             vendas_diarias = sales_copy[(sales_copy['sale_date'] >= date_from) & (sales_copy['sale_date'] <= date_to)]
-        
-        # Agrupar as vendas por dia
-        vendas_diarias = vendas_diarias.groupby('sale_date').sum(numeric_only=True).reset_index()
+            
+        sale_month_qtd = len(vendas_diarias['sale_month'].unique())
+        if sale_month_qtd > 1:
+            vendas_diarias = vendas_diarias.groupby('sale_month').sum(numeric_only=True).reset_index()
+            vendas_diarias['sale_month'] = vendas_diarias['sale_month'].dt.strftime('%b')
+        else:
+            vendas_diarias = vendas_diarias.groupby('sale_date').sum(numeric_only=True).reset_index()
+            vendas_diarias['sale_date'] = pd.to_datetime(vendas_diarias['sale_date']).dt.strftime('%d')
         
         # Adicionar coluna com a soma acumulada por dia
         vendas_diarias['cumulative_sales'] = vendas_diarias['total_value'].cumsum()
@@ -255,9 +260,12 @@ class MainWindow(QMainWindow):
         canvas = FigureCanvas(fig)
         
         ax = fig.add_subplot(111)
-        ax.plot(vendas_diarias['sale_date'].astype(str), vendas_diarias['cumulative_sales'], marker='o', linestyle='-', color='b')
+        if sale_month_qtd > 1:
+            ax.plot(vendas_diarias['sale_month'].astype(str), vendas_diarias['cumulative_sales'], marker='o', linestyle='-', color='b')
+        else:
+            ax.plot(vendas_diarias['sale_date'].astype(str), vendas_diarias['cumulative_sales'], marker='o', linestyle='-', color='b')
         ax.set_title("Crescimento de vendas")
-        ax.set_ylabel("Valor de vendas por dia")
+        ax.set_ylabel("Valor em R$")
         ax.grid(True)
         
         
@@ -348,15 +356,15 @@ class MainWindow(QMainWindow):
         
         # Converter as datas para o formato mês/ano e agrupar por mês
         sales_copy['sale_month'] = pd.to_datetime(sales_copy['sale_date']).dt.to_period('M')
-        
+        # Criando uma coluna para os dias ( Salvar apenas o dia da venda -> %d )
+        sales_copy['sale_day'] = pd.to_datetime(sales_copy['sale_date']).dt.strftime('%d')
         # Filtrar apenas as vendas do mês atual
         vendas_diarias = sales_copy[sales_copy['sale_month'].dt.month == actual_month]
-        
         # Agrupar as vendas por dia
-        vendas_diarias = vendas_diarias.groupby('sale_date').sum(numeric_only=True).reset_index()
-        
+        vendas_diarias = vendas_diarias.groupby('sale_day').sum(numeric_only=True).reset_index()
         # Adicionar coluna com a soma acumulada por dia
         vendas_diarias['cumulative_profit'] = vendas_diarias['profit'].cumsum()
+        
 
         # Obter o tamanho atual do QWidget que você usou no QtDesigner
         width_px = self.ui.widget_2.width()
@@ -372,7 +380,7 @@ class MainWindow(QMainWindow):
         canvas = FigureCanvas(fig)
         
         ax = fig.add_subplot(111)
-        ax.plot(vendas_diarias['sale_date'].astype(str), vendas_diarias['cumulative_profit'], marker='o', linestyle='-', color='b')
+        ax.plot(vendas_diarias['sale_day'].astype(str), vendas_diarias['cumulative_profit'], marker='o', linestyle='-', color='b')
         ax.set_title("Lucro por Dia ( Mês Atual )")
         ax.set_ylabel("Lucro ( R$ )")
         ax.grid(True)
@@ -416,8 +424,10 @@ class MainWindow(QMainWindow):
         sale_month_qtd = len(vendas_diarias['sale_month'].unique())
         if sale_month_qtd > 1:
             vendas_diarias = vendas_diarias.groupby('sale_month').sum(numeric_only=True).reset_index()
+            vendas_diarias['sale_month'] = vendas_diarias['sale_month'].dt.strftime('%b')
         else:
             vendas_diarias = vendas_diarias.groupby('sale_date').sum(numeric_only=True).reset_index()
+            vendas_diarias['sale_date'] = pd.to_datetime(vendas_diarias['sale_date']).dt.strftime('%d')
         
         # Adicionar coluna com a soma acumulada por dia
         vendas_diarias['cumulative_profit'] = vendas_diarias['profit'].cumsum()
@@ -470,12 +480,13 @@ class MainWindow(QMainWindow):
         
         # Converter as datas para o formato mês/ano e agrupar por mês
         sales_copy['sale_month'] = pd.to_datetime(sales_copy['sale_date']).dt.to_period('M')
+        sales_copy['sale_day'] = pd.to_datetime(sales_copy['sale_date']).dt.strftime('%d')
         
         # Filtrar apenas as vendas do mês atual
         vendas_diarias = sales_copy[sales_copy['sale_month'].dt.month == actual_month]
         
         # Agrupar as vendas por dia
-        vendas_diarias = vendas_diarias.groupby('sale_date').sum(numeric_only=True).reset_index()
+        vendas_diarias = vendas_diarias.groupby('sale_day').sum(numeric_only=True).reset_index()
         
         # Adicionar coluna com a soma acumulada por dia
         vendas_diarias['cumulative_sales'] = vendas_diarias['total_value'].cumsum()
@@ -494,7 +505,7 @@ class MainWindow(QMainWindow):
         canvas = FigureCanvas(fig)
         
         ax = fig.add_subplot(111)
-        ax.plot(vendas_diarias['sale_date'].astype(str), vendas_diarias['cumulative_sales'], marker='o', linestyle='-', color='b')
+        ax.plot(vendas_diarias['sale_day'].astype(str), vendas_diarias['cumulative_sales'], marker='o', linestyle='-', color='b')
         ax.set_title("Crescimento de vendas por dia no mês atual")
         ax.set_ylabel("Valor de vendas por dia")
         ax.grid(True)
@@ -523,6 +534,9 @@ class MainWindow(QMainWindow):
 
         # Agrupar as vendas por mês
         vendas_mensais = self.vendas.groupby('sale_month').sum(numeric_only=True).reset_index()
+        
+        # Transformar o mês em string ( Jan, Fev, Mar, etc )
+        vendas_mensais['sale_month'] = vendas_mensais['sale_month'].dt.strftime('%b')
 
         # Calcular a soma acumulada das vendas mensais
         vendas_mensais['cumulative_sales'] = vendas_mensais['total_value'].cumsum()
@@ -1557,14 +1571,12 @@ class MainWindow(QMainWindow):
         
         
         # Finalizar Pagamento
-        self.ui.label_finish_nome_cliente.setStyleSheet(f"{font_color}")
         self.ui.label_adicionar_taxa.setStyleSheet(f"{font_color}")
         self.ui.label_valor_total_compra.setStyleSheet(f"{font_color}")
         self.ui.label_metodo_pagamento.setStyleSheet(f"{font_color}")
         self.ui.label_valor_recebido.setStyleSheet(f"{font_color}")
         self.ui.label_troco.setStyleSheet(f"{font_color}")
         self.ui.label_parcelas.setStyleSheet(f"{font_color}")
-        self.ui.label_insert_nome_cliente.setStyleSheet(f"{font_color}")
         self.ui.label_metodo_pagamento_2.setStyleSheet(f"{font_color}")
         self.ui.label_valor_total_3.setStyleSheet(f"{font_color}")
         self.ui.lineEdit_adicionar_parcelas.setStyleSheet(f"{background_lineedit}")
